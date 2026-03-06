@@ -1,5 +1,3 @@
-file_name = "generated" # Name used for input and output files goes here
-
 def fifo(k: int, m: int, r: list[int]) -> int:
     cache = []
     miss = 0
@@ -67,8 +65,17 @@ def optff(k: int, m: int, r: list[int]) -> int:
 
 
 if __name__ == "__main__":
+    file_name = input("Enter name of data file without extension: ")
+    success = False
+
     # Open file
-    file = open(f"../data/{file_name}.in", "r")
+    while not success:
+        try:
+            file = open(f"../data/{file_name}.in", "r")
+        except:
+            file_name = input(f"{file_name}.in not found in ../data.\nEnter name of data file without extension: ")
+        else:
+            success = True
 
     # Read first line and split into k and m
     line = file.readline()
@@ -100,3 +107,5 @@ if __name__ == "__main__":
     file.write(f"FIFO  : {fifo_result}\n")
     file.write(f"LRU   : {lru_result}\n")
     file.write(f"OPTFF : {optff_result}")
+
+    print(f"Output file outputs/{file_name}.out created.")

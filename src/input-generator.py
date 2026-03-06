@@ -14,7 +14,9 @@ dist = input("Input type of distribution (u for uniform, n for normal): ")
 while (dist != "u" and dist != "n"):
   dist = input("Invalid input.\nInput type of distribution (u for uniform, n for normal): ")
 
-with open("../data/generated.in", "w") as file:
+file_name = input("Input file name without extension: ")
+
+with open(f"../data/{file_name}.in", "w") as file:
   file.write(f"{k} {m}")
   file.write("\n")
   for i in range(0, m):
