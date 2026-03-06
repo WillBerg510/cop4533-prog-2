@@ -1,3 +1,4 @@
+file_name = "generated" # Name used for input and output files goes here
 
 def fifo(k: int, m: int, r: list[int]) -> int:
     cache = []
@@ -67,7 +68,7 @@ def optff(k: int, m: int, r: list[int]) -> int:
 
 if __name__ == "__main__":
     # Open file
-    file = open("../data/generated.in", "r")
+    file = open(f"../data/{file_name}.in", "r")
 
     # Read first line and split into k and m
     line = file.readline()
@@ -93,6 +94,9 @@ if __name__ == "__main__":
     optff_result = optff(k, m, r)
 
     file.close()
-    print("FIFO  : ", fifo_result)
-    print("LRU   : ", lru_result)
-    print("OPTFF : ", optff_result)
+
+    file = open(f"../outputs/{file_name}.out", "w")
+
+    file.write(f"FIFO  : {fifo_result}\n")
+    file.write(f"LRU   : {lru_result}\n")
+    file.write(f"OPTFF : {optff_result}")
