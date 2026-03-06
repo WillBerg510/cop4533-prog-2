@@ -42,6 +42,6 @@ The misses for each policy are:
 | LRU    | 6      |
 | OPTFF  | 4      |
 
-OPTFF performs better here because it can look into future elements of the sequence and see that 3 and 4 will not appear again in the sequence when they are first reached, while 1 and 2 are. So, OPTFF will not evict 1 and 2 as they do appear again and 3 gets evicted. The other policies will evict 1 and 2 which will cause a miss when they appear again in the sequence.
+OPTFF performs better here because it can look into future elements of the sequence and see that 3 and 4 will not appear again in the sequence when they are first reached, while 1 and 2 are going to appear again. So, OPTFF will not evict 1 and 2 as they do appear again and 3 gets evicted. The other policies will evict 1 and 2 which will cause a miss when they appear again in the sequence.
 
 The data for the example can be found in the q2.in file, with the output in the q2.out file.
