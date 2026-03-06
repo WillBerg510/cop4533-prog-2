@@ -26,6 +26,43 @@ def lru(k: int, m: int, r: list[int]) -> int:
 
     return miss
 
+def optff(k: int, m: int, r: list[int]) -> int:
+    cache = []
+    miss = 0
+
+    # First iteration: create a dictionary that pairs each value with a list of its appearances
+    appearances = {}
+    for i in range(0, m):
+        value = r[i]
+        if value in appearances:
+            appearances[value].append(i)
+        else:
+            appearances[value] = [i]
+
+    # Second iteration: go through all requests
+    for i in range(0, m):
+        value = r[i]
+        if value not in cache:
+            cache.append(value)
+            miss += 1
+            if len(cache) > k:
+                furthest_position = -1
+                furthest_index = -1
+                for n in range(0, len(cache) - 1):
+                    # If a number in the cache will never appear again, it is an optimal pick for removal
+                    if len(appearances[cache[n]]) == 0:
+                        furthest_index = n
+                        break
+                    # Otherwise, find the number that appears the latest
+                    if appearances[cache[n]][0] > furthest_position:
+                        furthest_index = n
+                        furthest_position = appearances[cache[n]][0]
+                cache.pop(furthest_index)
+        # Remove the current appearance from the dictionary
+        appearances[value].pop(0)
+    
+    return miss
+
 
 
 if __name__ == "__main__":
@@ -53,7 +90,7 @@ if __name__ == "__main__":
     lru_result = lru(k, m, r)
 
     # OPTFF
-    optff_result = "TODO"
+    optff_result = optff(k, m, r)
 
     file.close()
     print("FIFO  : ", fifo_result)
